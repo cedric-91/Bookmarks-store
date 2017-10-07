@@ -11,7 +11,12 @@ body {
 }
 
 .container {
-    width: 780px;
+    width: 650px;
     margin: 0 auto;
     height: auto;
+}
+
+@media only screen and (max-width: 670px) {
+        .container { width: 100%; }
+        body { padding: 0 1.5em; }
 }

@@ -1,28 +1,30 @@
-form {
-    width: calc(((100% /12) * 12) - 20px);
-    background-color: #fff;
-    height: 500px;
-    padding: 0 1.5em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+header h1 {
+  border-bottom: 1px solid #ccc;
 }
 
-.header h1 {
-  text-align: center;
+form {
+  width: 100%;
+  height: 250px;
+}
+.inputs {
+  margin-bottom: 1.0em;
 }
 
 .inputs input {
-    width: 400px;
-    border: 1px solid #ddd;
-    padding: 1.0em;
-    margin-bottom: 1.0em;
+    padding: 0.6em 0.8em;
+    width: 275px;
 }
 
 .btn {
-    padding: 1.0em 1.5em;
-    border: none;
-    background-color: $primary-green;
-    color: #fff;
-    cursor: pointer;
+  padding: 1.0em 1.5em;
+  border: none;
+  background-color: $primary-green;
+  color: #FFF;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 670px) {
+      .inputs input {  width: 100%; }
+      .btn {  width: 100%; }
 }
