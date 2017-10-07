@@ -1,0 +1,34 @@
+{
+  "name": "bookmarks",
+  "version": "1.0.0",
+  "description": "Store bookmarks to local storage and displaying them on the browser",
+  "main": "index.js",
+  "scripts": {
+    "run": "index.html"
+  },
+  "private": true,
+  "repository": {
+        "type": "git",
+        "url": "https://github.com/cedric-91/Bookmarks-store.github.git"
+    },
+    "bugs": {
+        "url": "https://github.com/cedric-91/Bookmarks-store.github.io/issues"
+    },
+  "keywords": [
+    "local storage",
+    "storage",
+    "bookmarks"
+  ],
+  "author": "Cedric Tientcheu",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-header": "^1.8.9",
+    "gulp-jshint": "^2.0.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-uglify": "^3.0.0"
+  }
+}
