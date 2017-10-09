@@ -6,6 +6,7 @@ var gulp = require('gulp'),
       header = require('gulp-header'),
       cssnano = require('gulp-cssnano'),
       jshint = require('gulp-jshint'),
+      //browserSync = require('browser-sync'),
       package = require('./package.json');
 
 var banner = [
@@ -44,8 +45,23 @@ gulp.task('js', function() {
     .pipe(gulp.dest('app/assets/js'))
 });
 
+// Browser Sync. Looks for the index file
+/*gulp.task('browser-sync', function() {
+      browserSync.init(null, {
+            server : {
+                  baseDir : "app"
+            }
+      });
+});*/
+
+// Reload Page on change
+/*gulp.task('bs-reload', function() {
+      browserSync.reload();
+});*/
+
 // Run default functions and watch for any changes on scss, js files
 gulp.task('default', ['scss', 'js'], function () {
-    gulp.watch('src/scss/**/*.scss', ['scss']);
-    gulp.watch('src/js/*.js', ['js']);
+        gulp.watch('src/scss/**/*.scss', ['scss']);
+        gulp.watch('src/js/*.js', ['js']);
+        //gulp.watch('app/*.html', ['bs-reload']);
 });

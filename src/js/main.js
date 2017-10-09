@@ -1,29 +1,76 @@
 'use strict';
 
-// Get Form element
-var myForm = document.getElementById('myForm');
+var key = 'bookmarks';
+var text = '';
 
-function saveBookmark(e) {
+function checkWebStorage() {
 
-    // Get input values
-    var siteName = document.getElementById('siteName').value;
-    var siteURL = document.getElementById('siteURL').value;
+      if (typeof(Storage) === null) {
+            text += 'Please upgrade your browser.';
+            window.alert(text);
+      } else {
 
-    // Storing values in a JSON object
-    var bookmarks = {
-        name : siteName,
-        url : siteURL
-    };
-
-    // Storing to localStorage
-    if (typeof(Storage) !== 'undefined') { // Check if browser support
-        localStorage.setItem('test', 'Hello World!');
-    } else {
-        console.log('Browser not compatible with Web Storage');
-    }
-
-    //console.log(bookmarks);
-    e.preventDefault();
+            if (window.localStorage.getItem(key)) {
+                  getBookmarks();
+            } else {
+                  console.log('empty');
+            }
+      }
 }
 
- myForm.addEventListener('submit', saveBookmark);
+// Save bookmarks to localStorage
+function saveBookmarks(e) {
+
+      // Get values 
+      var siteName = document.getElementById('siteName').value;
+      var siteURL = document.getElementById('siteURL').value;
+
+      // Store values to JSON format
+      var bookmark = {
+            name : siteName,
+            url : siteURL
+      };
+
+      // Empty array
+      var bookmarks = [];
+
+      // localStorage exist/empty
+      if (window.localStorage.getItem(key) === null) {
+            // Add values to the empty array
+            bookmarks.push(bookmark);
+            // Store array to the localStorage
+            window.localStorage.setItem(key, JSON.stringify(bookmarks));// Convert to string
+      } else {
+            // Get bookmarks from localStorage
+            var bookmarks = JSON.parse(window.localStorage.getItem(key));// Convert to JSON
+            // Add new bookbmarks to the array
+            bookmarks.push(bookmark);
+            // Re-set localStorage with new values
+            window.localStorage.setItem(key, JSON.stringify(bookmarks));// Convert to string
+      } 
+
+      this.reset();// Reset the form
+      e.preventDefault();
+}
+
+function getBookmarks() {
+
+      // Get bookmarks from localStorage
+      var bookmarks = JSON.parse(window.localStorage.getItem(key));
+
+      // Loop through # bookmarks
+      
+      /*for (var i = 0; i < bookmarks.length; i++) {
+            var name = bookmarks[i].name;
+            var url = bookmarks[i].url;
+            console.log(name);
+            
+      }*/
+
+}
+getBookmarks();
+
+// Add submit event to the form ele
+document.getElementById('myForm').addEventListener('submit', saveBookmarks);
+
+window.onload = checkWebStorage;

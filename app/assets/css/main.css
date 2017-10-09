@@ -420,7 +420,7 @@ body {
     padding: 0 1.5em; } }
 
 /*  ===== Modules =====***/
-header h1 {
+.main-header {
   border-bottom: 1px solid #ccc; }
 
 form {
@@ -437,10 +437,38 @@ form {
 .btn {
   padding: 1.0em 1.5em;
   border: none;
-  background-color: #2EB872;
-  color: #FFF;
   cursor: pointer;
   font-weight: bold; }
+
+.btn-green {
+  background-color: #2EB872;
+  color: #FFF; }
+
+.btn-red {
+  color: #FF5D6E; }
+  .btn-red:hover {
+    text-decoration: none; }
+
+.warning {
+  display: none;
+  height: 40px;
+  width: 275px;
+  margin-bottom: 1.0em;
+  background-color: #FF5D6E;
+  color: #FFF;
+  font-weight: bold;
+  padding: 1.0em; }
+
+.results {
+  display: block;
+  background-color: #FFF;
+  padding: 1.0em;
+  height: 75px; }
+  .results .left-column {
+    float: left; }
+  .results .right-cloumn {
+    float: right;
+    margin-top: 20px; }
 
 @media only screen and (max-width: 670px) {
   .inputs input {
