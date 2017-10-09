@@ -4,7 +4,7 @@
 
 form {
   width: 100%;
-  height: 250px;
+  height: 188px;
 }
 .inputs {
   margin-bottom: 1.0em;
@@ -27,6 +27,11 @@ form {
   color: #FFF;
 }
 
+#btn-display {
+  display: none;
+  margin-bottom: 1.0em;
+}
+
 .btn-red {
     color: $warning;
     &:hover {
@@ -45,16 +50,17 @@ form {
     padding: 1.0em;
 }
 
-.results {
+.bookmarks-results {
     display: block;
     background-color: #FFF;
     padding: 1.0em;
     height: 75px;
+    margin-bottom: 1.0em;
 
     .left-column {
           float: left;
     }
-    .right-cloumn {
+    .right-column {
           float: right;
           margin-top: 20px;
     }
