@@ -8,136 +8,185 @@
  */
 'use strict';
 
-var key = 'bookmarks';
-var text = '';
-var i = 0;
+// Declaring variables
+var key = 'bookmarks',
+    i = 0,
+    text = '',
+    myForm = document.getElementById('myForm'),
+    msg = document.getElementById('msg');
 
-function validateForm(name, url) {
 
-      var warning = document.querySelector('.warning');
+// Delete all bookmarks from array/localStorage
+function deleteAllBookmarks() {
 
-      if (name === '' || url === '') {
-            warning.style.display = 'block';
-            warning.innerHTML = 'Please fill the missing form.';
-            return false;
-      } else {
-            
-      }
+    //var card = document.querySelectorAll('.bookmarks-results');
+    //var cardCont = document.getElementById('results-container');
+    //console.log(card);
 
-      return false;
+   /* while (card[0]) {
+        card[0].parentNode.removeChild(card[0]);
+    }*/
+
+    // Delete from localStorage
+    //window.localStorage.clear(key);
+    //return false;
+    
 }
 
-function displayButton() {
-
-      var displayBtn = document.getElementById('btn-display');
-      displayBtn.style.display = 'block';
-      
-      displayBtn.addEventListener('click', getBookmarks);
-}
-
-// Save bookmarks to localStorage
-function saveBookmarks(e) {
-
-      // Get values 
-      var siteName = document.getElementById('siteName').value;
-      var siteURL = document.getElementById('siteURL').value;
-
-      //validateForm(siteName, siteURL);
-
-      // Store values to JSON format
-      var bookmark = {
-            name : siteName,
-            url : siteURL
-      };
-
-      // Empty array
-      var bookmarks = [];
-
-      // localStorage exist/empty
-      if (window.localStorage.getItem(key) === null) {
-            // Add values to the empty array
-            bookmarks.push(bookmark);
-            // Store array to the localStorage
-            window.localStorage.setItem(key, JSON.stringify(bookmarks));// Convert to string
-            displayButton();
-      } else {
-            // Get bookmarks from localStorage
-            var bookmarks = JSON.parse(window.localStorage.getItem(key));// Convert to JSON
-            // Add new bookbmarks to the array
-            bookmarks.push(bookmark);
-            // Re-set localStorage with new values
-            window.localStorage.setItem(key, JSON.stringify(bookmarks));// Convert to string
-      } 
-
-      this.reset();// Reset the form
-      e.preventDefault();
-}
-
+// Delete books
 function deleteBookmarks(url) {
-      
-      // Get bookmarks from localStorage
-      var bookbmarks = JSON.parse(window.localStorage.getItem(key));
 
-      // Loop throught bookmarks URL
-      for (; i < bookbmarks.length; i++) {
-            var link = bookbmarks[i].url;
-            console.log(link);
-      }
-      
-      //console.log(url);
+    // Get bookmarks from localStorage
+    var bookmarks = JSON.parse(window.localStorage.getItem(key));
+
+    // Loop throught bookmarks
+    for (var j = 0; j< bookmarks.length; j++) {
+            if (bookmarks[j].url === url) {
+                console.log(true);
+                // Remove bookmarks from the array
+                bookmarks.splice(j, 1);
+            }
+    }
+
+    // Update/Re-set localStorage
+    window.localStorage.setItem(key, JSON.stringify(bookmarks));
+
+    getBookmarks();
 }
 
+// Display 'delete btn' when array/localStorage is greater than 1
+function displayDeleteButton() {
+
+    // Get bokmarks
+    var bookmarks = JSON.parse(window.localStorage.getItem(key));
+    var deleteAll = document.getElementById('btn-delete-all');
+
+    if (bookmarks.length >= 2) {
+        deleteAll.style.opacity = 1;
+    }
+
+    //deleteAll.addEventListener('click', deleteAllBookmarks);
+}
+
+// Get bookmarks from localStorage    
 function getBookmarks() {
+    
+    // Get bookmarks from  localStorage
+    var books = JSON.parse(window.localStorage.getItem(key));
+    var resultsContainer = document.querySelector('.bookmarks-results-wrap');
 
-      // Get bookmarks from localStorage
-      var bookmarks = JSON.parse(window.localStorage.getItem(key));
+    //resultsContainer.innerHTML = '';
 
-      // Get the results UI
-      var resultsWrap = document.getElementById('results-wrap');
-      
-      //resultsWrap.innerHTML = '';
-
-      // Loop through # bookmarks
-      if (bookmarks !== null) {
-            for (; i < bookmarks.length; i++) {
-                  var name = bookmarks[i].name;
-                  var url = bookmarks[i].url;
-                  text = 'delete';
-                  // Build Output UI
-                  var card = '<div class="bookmarks-results">' + 
-                              // Left Column 
-                              '<div class="left-column">' + 
-                              '<h2>' + name + '</h2>' + 
-                              '<a href="'+ url +'" target="_blank">Visit</a>' + 
-                              '</div>' + 
-                              // Second Column 
-                              '<div class="right-column">' + 
-                              '<a href="#" class="btn btn-red delete-bookmarks" onclick="deleteBookmarks(\''+ url +'\')">' + text + '</a>' +
-                              '</div>' + 
-                              '</div>'; 
-                  resultsWrap.innerHTML += card;
+    if (books !== null) {
+        for (; i < books.length; i++) {
+            var name = books[i].name;
+            var url = books[i].url;
+            var card = '<div class="bookmarks-results">' + 
+                       '<div class="left-cloumn">' +
+                       '<h2 class="second-header">' + name + '</h2>' +
+                       '<a href="'+ url +'" class="btn btn-link" target="_blank">Visit site</a>' +
+                       '</div>' +
+                       // Right Column
+                       '<div class="right-column">' +
+                       '<a onclick="deleteBookmarks(\''+ url +'\')" class="btn btn-delete" href="#">delete</a>' +
+                       '</div>' + 
+                       '</div>';
+            resultsContainer.innerHTML += card;
+            var results = document.querySelectorAll('.bookmarks-results');
+            for (var j = 0; j < results.length; j++) {
+                    results[j].style.opacity = 1;
             }
-      }
-      
+        }       
+
+    }
+    displayDeleteButton();
 }
 
-// Check if browser support Web Storage (localStorage)
+// Display button when bookmarks has been added to localStorage
+/*function displayButton(){
+
+    var btn = document.getElementById('btn-display');   
+
+    btn.style.display = 'block';
+    btn.addEventListener('click', getBookmarks);
+}*/
+
+// Check if Web Storage is compatible with user browser
 function checkWebStorage() {
-      
-      if (typeof(Storage) === null) {
-            text += 'Please upgrade your browser.';
-            window.alert(text);
-      } else {
-            // Check if the key exist/empty
-            if (window.localStorage.getItem(key)) {
-                  displayButton();
-            } else {
-                  console.log('localStorage empty');
-            }
-      }
+
+    // Check if Storage is compatible
+    if (typeof(Storage) === null) {
+        msg += 'Please upgrade your browser';
+        window.alert(msg);
+    } else {
+        // Check if the 'key' exist/empty
+        if (window.localStorage.getItem(key) !== null) {
+            getBookmarks();
+        } else {
+            console.log('localStorage is empty');
+        }
+    }
 }
 
-// Add submit event to the form ele
-document.getElementById('myForm').addEventListener('submit', saveBookmarks);
+// Check form fields 
+function formValidation(name, url) {
+
+    // Check if the form is filled in
+    if (name === '' || url === '') {
+        text += 'The form must be filled in';
+        msg.style.display = 'block';
+        msg.className = 'msg-warning';
+        msg.innerHTML = text;
+        return false;
+    }
+
+    return true;
+
+}
+
+// Store bookmarks in localStorage
+function saveBookmarks(e) {
+    
+    // Get the value
+    var siteName = document.getElementById('siteName').value;
+    var siteURL = document.getElementById('siteURL').value;
+
+    // Stops storing empty fields into the array/localStorage
+    if (!formValidation(siteName, siteURL)) {
+        return false;
+    }
+
+    // Store values in JSON format
+    var bookmark = {
+        name : siteName,
+        url : siteURL
+    };
+
+    var bookmarks = [];// Empty array
+    
+    myForm.reset();
+
+    // Store in localStorgae
+    if (window.localStorage.getItem(key) === null) {
+        bookmarks.push(bookmark);// Add store values into the array
+        window.localStorage.setItem(key, JSON.stringify(bookmarks));// Store array into localStorage.
+        //displayDeleteButton();
+    } else {
+        var bookmarks = JSON.parse(window.localStorage.getItem(key));// Get bookmarks from storage in JSON format
+        // Add new values into the array
+        bookmarks.push(bookmark);
+        // Update/Re-set localStorage
+        window.localStorage.setItem(key, JSON.stringify(bookmarks));
+    }
+
+    // Display bookmarks
+    getBookmarks();
+
+    //myForm.reset(); // Reset form  
+    e.preventDefault();
+}
+
+// Get the form element
+myForm.addEventListener('submit', saveBookmarks);
 
 window.onload = checkWebStorage;

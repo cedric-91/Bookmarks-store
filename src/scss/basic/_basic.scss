@@ -6,14 +6,108 @@
 body {
   font-size: 100%;
   line-height: 1.5;
-  background-color: #eee;
-  font-family: monospace;
+  background-color: #fff;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
 .container {
     width: 650px;
     margin: 0 auto;
     height: auto;
+    min-height: 450px;
+}
+
+header h1 {
+  border-bottom: 1px solid #7c7b7b;
+  color: #7c7b7b;
+}
+
+footer {
+  border-top: 1px solid #c5c2c2; 
+}
+
+#msg {
+  display: none;
+  margin-bottom: 1.0em;
+  padding: 0.6em;
+  text-align: center;
+  font-weight: bold;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0px 2px 0 rgba(0,0,0,.5);
+}
+
+.msg-sucess {
+  background-color: $primary-green;
+  color: #ffffff;
+}
+
+.msg-warning {
+  background-color: $warning;
+  color: #ffffff;
+}
+
+#btn-display {
+  display: none;
+  margin-bottom: 1.0em;
+}
+
+#btn-delete-all {
+  //display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in 0s;
+}
+
+.bookmarks-results-wrap {
+  width: 100%;
+  height: auto;
+}
+
+.bookmarks-results {
+   width: 100%;
+   height: auto;
+   padding: 1.0em;
+   background-color: #ffffff;
+   margin-bottom: 1.0em;
+   opacity: 0;
+   transition: opacity 0.5s ease-in 0s;
+   border-top: 1px solid #eeeeee;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+}
+
+.btn-delete {
+  color: $warning;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.btn-link {
+  color: $dark-yellow;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.right-column {
+  display: flex;
+  align-items: center;
+}
+
+.btn-container {
+  width: 100%;
+  height: auto;
+  min-height: 65px;
+  position: relative;
+  &::after {
+    content: '';
+    clear: both;
+  }
 }
 
 @media only screen and (max-width: 670px) {

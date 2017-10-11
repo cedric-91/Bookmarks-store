@@ -1,44 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Bookmarks Store</title>
-  <link rel="stylesheet" href="assets/css/main.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bookmark Store</title>
+    <link rel="stylesheet" href="assets/css/main.min.css">
 </head>
 <body>
-
-  <!-- Overall Container -->
+    
     <div class="container">
-    <header>
-        <h1 class="main-header">Bookmark Store</h1>
-    </header>
+        <header>
+            <h1 class="main-header">Bookmark Store</h1>
+        </header>
 
-        <form action=""  id="myForm">
-            <div class="inputs">
-                <input type="text" id="siteName" placeholder="Site Name">
-            </div>
-
-            <div class="inputs">
-                <input type="text" id="siteURL" placeholder="Site URL">
-            </div>
-
-            <div class="warning"></div>
-
-            <button type="submit" class="btn btn-green" id="submit-btn">Submit</button>
+        <form id="myForm">
+            <input type="text" id="siteName" placeholder="Site Name">
+            <input type="text" id="siteURL" placeholder="Site URL">
+            <button class="btn btn-green">Submit</button>
         </form>
-        <button id="btn-display">Display Bookamrks</button>
+
+        <div class="btn-container">
+            <button class="btn btn-default" id="btn-display">Display Bookmarks</button>
+            <button class="btn btn-default" id="btn-delete-all">Delete All</button>
+        </div>
+
+        <div class="bookmarks-results-wrap" id="results-container"></div>
     </div>
 
-    <div class="results-wrap container" id="results-wrap">
-          <!-- <h1 class="main-header">Results</h1> -->
-
-          <!-- <div class="bookmarks-results">
-            
-          </div> -->
-    </div>
-
-  <script src="assets/js/main.min.js"></script>
+    <div id="msg"></div>
+    
+    <footer class="container">
+        copyright
+    </footer>
+    <script src="assets/js/main.min.js"></script>
 </body>
 </html>

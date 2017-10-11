@@ -405,13 +405,105 @@ template {
 body {
   font-size: 100%;
   line-height: 1.5;
-  background-color: #eee;
-  font-family: monospace; }
+  background-color: #fff;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif; }
 
 .container {
   width: 650px;
   margin: 0 auto;
+  height: auto;
+  min-height: 450px; }
+
+header h1 {
+  border-bottom: 1px solid #7c7b7b;
+  color: #7c7b7b; }
+
+footer {
+  border-top: 1px solid #c5c2c2; }
+
+#msg {
+  display: none;
+  margin-bottom: 1.0em;
+  padding: 0.6em;
+  text-align: center;
+  font-weight: bold;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  -webkit-box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.5); }
+
+.msg-sucess {
+  background-color: #2EB872;
+  color: #ffffff; }
+
+.msg-warning {
+  background-color: #FF5D6E;
+  color: #ffffff; }
+
+#btn-display {
+  display: none;
+  margin-bottom: 1.0em; }
+
+#btn-delete-all {
+  opacity: 0;
+  -webkit-transition: opacity 0.5s ease-in 0s;
+  transition: opacity 0.5s ease-in 0s; }
+
+.bookmarks-results-wrap {
+  width: 100%;
   height: auto; }
+
+.bookmarks-results {
+  width: 100%;
+  height: auto;
+  padding: 1.0em;
+  background-color: #ffffff;
+  margin-bottom: 1.0em;
+  opacity: 0;
+  -webkit-transition: opacity 0.5s ease-in 0s;
+  transition: opacity 0.5s ease-in 0s;
+  border-top: 1px solid #eeeeee;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between; }
+
+.btn-delete {
+  color: #FF5D6E; }
+  .btn-delete:hover {
+    text-decoration: none; }
+
+.btn-link {
+  color: #8a88f1;
+  text-decoration: none; }
+  .btn-link:hover {
+    text-decoration: underline; }
+
+.right-column {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center; }
+
+.btn-container {
+  width: 100%;
+  height: auto;
+  min-height: 65px;
+  position: relative; }
+  .btn-container::after {
+    content: '';
+    clear: both; }
 
 @media only screen and (max-width: 670px) {
   .container {
@@ -420,63 +512,54 @@ body {
     padding: 0 1.5em; } }
 
 /*  ===== Modules =====***/
-.main-header {
-  border-bottom: 1px solid #ccc; }
-
-form {
+#myForm {
+  background: #FEFFEA;
   width: 100%;
-  height: 188px; }
-
-.inputs {
+  height: auto;
+  min-height: 180px;
+  padding: 1.0em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   margin-bottom: 1.0em; }
 
-.inputs input {
+input {
+  width: 300px;
   padding: 0.6em 0.8em;
-  width: 275px; }
-
-.btn {
-  padding: 1.0em 1.5em;
+  margin-bottom: 1.0em;
   border: none;
-  cursor: pointer;
-  font-weight: bold; }
+  -webkit-box-shadow: inset 0 0px 2px 0 rgba(0, 0, 0, 0.5);
+          box-shadow: inset 0 0px 2px 0 rgba(0, 0, 0, 0.5); }
+
+.btn, .btn-default {
+  border: none;
+  cursor: pointer; }
+
+.btn-default {
+  padding: 1.0em;
+  float: left;
+  margin: 0 0.4em; }
+  .btn-default:hover {
+    -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.65);
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.65); }
 
 .btn-green {
   background-color: #2EB872;
-  color: #FFF; }
-
-#btn-display {
-  display: none;
-  margin-bottom: 1.0em; }
-
-.btn-red {
-  color: #FF5D6E; }
-  .btn-red:hover {
-    text-decoration: none; }
-
-.warning {
-  display: none;
-  height: 40px;
-  width: 275px;
-  margin-bottom: 1.0em;
-  background-color: #FF5D6E;
-  color: #FFF;
+  color: #ffffff;
   font-weight: bold;
+  width: 100px;
   padding: 1.0em; }
-
-.bookmarks-results {
-  display: block;
-  background-color: #FFF;
-  padding: 1.0em;
-  height: 75px;
-  margin-bottom: 1.0em; }
-  .bookmarks-results .left-column {
-    float: left; }
-  .bookmarks-results .right-column {
-    float: right;
-    margin-top: 20px; }
+  .btn-green:hover {
+    -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.65);
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.65); }
 
 @media only screen and (max-width: 670px) {
-  .inputs input {
+  input {
     width: 100%; }
-  .btn {
-    width: 100%; } }
+  .btn-green {
+    width: 100%;
+    display: block; } }
