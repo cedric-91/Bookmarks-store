@@ -13,7 +13,8 @@ var key = 'bookmarks',
     i = 0,
     text = '',
     myForm = document.getElementById('myForm'),
-    msg = document.getElementById('msg');
+    msg = document.getElementById('msg'),
+    resultsContainer = document.querySelector('.bookmarks-results-wrap');
 
 
 // Delete all bookmarks from array/localStorage
@@ -54,20 +55,6 @@ function deleteBookmarks(url) {
     getBookmarks();
 }
 
-// Display 'delete btn' when array/localStorage is greater than 1
-function displayDeleteButton() {
-
-    // Get bokmarks
-    var bookmarks = JSON.parse(window.localStorage.getItem(key));
-    var deleteAll = document.getElementById('btn-delete-all');
-
-    if (bookmarks.length >= 2) {
-        deleteAll.style.opacity = 1;
-    }
-
-    //deleteAll.addEventListener('click', deleteAllBookmarks);
-}
-
 // Get bookmarks from localStorage    
 function getBookmarks() {
     
@@ -99,17 +86,8 @@ function getBookmarks() {
         }       
 
     }
-    displayDeleteButton();
 }
 
-// Display button when bookmarks has been added to localStorage
-/*function displayButton(){
-
-    var btn = document.getElementById('btn-display');   
-
-    btn.style.display = 'block';
-    btn.addEventListener('click', getBookmarks);
-}*/
 
 // Check if Web Storage is compatible with user browser
 function checkWebStorage() {
@@ -123,7 +101,9 @@ function checkWebStorage() {
         if (window.localStorage.getItem(key) !== null) {
             getBookmarks();
         } else {
-            console.log('localStorage is empty');
+            text += 'Bookmarks Empty';
+            var para = '<p class="bold align-center" id="results-msg">' + text + '</p>';
+            resultsContainer.innerHTML = para;
         }
     }
 }
@@ -177,6 +157,14 @@ function saveBookmarks(e) {
         bookmarks.push(bookmark);
         // Update/Re-set localStorage
         window.localStorage.setItem(key, JSON.stringify(bookmarks));
+    }
+    
+    // Get results 'msg/text' 
+    var resultsMsg = document.getElementById('results-msg');
+    // Check if results 'msg' exist
+    if (resultsMsg) {
+        // Delete the msg from the DOM
+        resultsMsg.parentNode.removeChild(resultsMsg);
     }
 
     // Display bookmarks

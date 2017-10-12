@@ -14,25 +14,31 @@
             <h1 class="main-header">Bookmark Store</h1>
         </header>
 
-        <form id="myForm">
-            <input type="text" id="siteName" placeholder="Site Name">
-            <input type="text" id="siteURL" placeholder="Site URL">
-            <button class="btn btn-green">Submit</button>
-        </form>
+        <div class="form-container">
+            <h3 class="third-main-header">Add your Bookmarks</h3>
+            <form id="myForm">
+                <input type="text" id="siteName" placeholder="Site Name">
+                <input type="text" id="siteURL" placeholder="Site URL">
+                <div id="msg">TEST</div>
+                <button class="btn btn-green">Submit</button>
+            </form>
+        </div>
 
         <div class="btn-container">
-            <button class="btn btn-default" id="btn-display">Display Bookmarks</button>
-            <button class="btn btn-default" id="btn-delete-all">Delete All</button>
+            <!-- <button class="btn btn-default" id="btn-delete-all">Delete All</button> -->
         </div>
 
         <div class="bookmarks-results-wrap" id="results-container"></div>
-    </div>
 
-    <div id="msg"></div>
+        <footer>
+            <ul class="footer-list">
+                <li>&copy; copyright 2017</li>
+                <li><a href="#">Terms & Condition</a></li>
+            </ul>
+            <p class="author">Author: Cedric Tientcheu</p>
+        </footer>
+    </div>
     
-    <footer class="container">
-        copyright
-    </footer>
     <script src="assets/js/main.min.js"></script>
 </body>
 </html>

@@ -1,18 +1,20 @@
-#myForm {
-    background: $light-yellow;
+.form-container {
+    background: $dark-grey;
     width: 100%;
     height: auto;
     min-height: 180px;
     padding: 1.0em;
-    display: flex;
-    flex-direction: column;
     margin-bottom: 1.0em;
+}
+
+#myForm {
+    width: 100%;
+    height: auto;
 }
 
 input {
     width: 300px;
     padding: 0.6em 0.8em;
-    margin-bottom: 1.0em;
     border: none;
     box-shadow: inset 0 0px 2px 0 rgba(0,0,0,.5);
 }
@@ -36,16 +38,24 @@ input {
     background-color: $primary-green;
     color: #ffffff;
     font-weight: bold;
-    width: 100px;
+    width: 100%;
+    display: block;
     padding: 1.0em;
+    margin-top: 1.0em;
     &:hover {
         box-shadow: 0px 2px 5px rgba(0,0,0,.65);
     }
 }
 
+.third-main-header {
+    border-bottom: 1px solid #cccccc;
+    margin-bottom: 1.0em;
+    display: block;
+    color: #242424;
+}
 
 // Media Query
 @media only screen and (max-width: 670px) {
-    input { width: 100%; }
+    input { width: 100%; margin-bottom: 1.0em; }
     .btn-green { width: 100%; display: block; }
 }
