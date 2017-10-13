@@ -34,7 +34,38 @@ function deleteAllBookmarks() {
     
 }
 
-// Delete books
+//#region Get bookmarks from localStorage    
+function getBookmarks() {
+    
+    // Get bookmarks from  localStorage
+    var books = JSON.parse(window.localStorage.getItem(key));
+    var resultsContainer = document.querySelector('.bookmarks-results-wrap');
+
+    //resultsContainer.innerHTML = '';
+
+    for (; i < books.length; i++) {
+        var name = books[i].name;
+        var url = books[i].url;
+        var card = '<div class="bookmarks-results">' + 
+                    '<div class="left-cloumn">' +
+                    '<h2 class="second-header">' + name + '</h2>' +
+                    '<a href="'+ url +'" class="btn btn-link" target="_blank">Visit site</a>' +
+                    '</div>' +
+                    // Right Column
+                    '<div class="right-column">' +
+                    '<a onclick="deleteBookmarks(\''+ url +'\')" class="btn btn-delete" href="#">delete</a>' +
+                    '</div>' + 
+                    '</div>';
+        resultsContainer.innerHTML += card;
+        var results = document.querySelectorAll('.bookmarks-results');
+        for (var j = 0; j < results.length; j++) {
+                results[j].style.opacity = 1;
+        }
+    }       
+
+}
+
+//#region Delete books
 function deleteBookmarks(url) {
 
     // Get bookmarks from localStorage
@@ -43,7 +74,6 @@ function deleteBookmarks(url) {
     // Loop throught bookmarks
     for (var j = 0; j< bookmarks.length; j++) {
             if (bookmarks[j].url === url) {
-                console.log(true);
                 // Remove bookmarks from the array
                 bookmarks.splice(j, 1);
             }
@@ -53,43 +83,12 @@ function deleteBookmarks(url) {
     window.localStorage.setItem(key, JSON.stringify(bookmarks));
 
     getBookmarks();
-}
-
-// Get bookmarks from localStorage    
-function getBookmarks() {
-    
-    // Get bookmarks from  localStorage
-    var books = JSON.parse(window.localStorage.getItem(key));
-    var resultsContainer = document.querySelector('.bookmarks-results-wrap');
-
-    //resultsContainer.innerHTML = '';
-
-    if (books !== null) {
-        for (; i < books.length; i++) {
-            var name = books[i].name;
-            var url = books[i].url;
-            var card = '<div class="bookmarks-results">' + 
-                       '<div class="left-cloumn">' +
-                       '<h2 class="second-header">' + name + '</h2>' +
-                       '<a href="'+ url +'" class="btn btn-link" target="_blank">Visit site</a>' +
-                       '</div>' +
-                       // Right Column
-                       '<div class="right-column">' +
-                       '<a onclick="deleteBookmarks(\''+ url +'\')" class="btn btn-delete" href="#">delete</a>' +
-                       '</div>' + 
-                       '</div>';
-            resultsContainer.innerHTML += card;
-            var results = document.querySelectorAll('.bookmarks-results');
-            for (var j = 0; j < results.length; j++) {
-                    results[j].style.opacity = 1;
-            }
-        }       
-
-    }
+    location.reload();// Reload the page
+    return false;
 }
 
 
-// Check if Web Storage is compatible with user browser
+//#region Check if Web Storage is compatible with user browser
 function checkWebStorage() {
 
     // Check if Storage is compatible
@@ -124,7 +123,26 @@ function formValidation(name, url) {
 
 }
 
-// Store bookmarks in localStorage
+// Check if bookmarks exist
+function bookmarksExist(name, url) {
+    // Get bookmarks from localStorage
+    var bookmarks = JSON.parse(window.localStorage.getItem(key));
+
+    // Loop throught bookmarks
+    for (var i = 0; i < bookmarks.length; i++) {
+            if (bookmarks[i].name === name || bookmarks[i].url === url) {
+                    text += 'Bookmarks already exist';
+                    msg.style.display = 'block';
+                    msg.className = 'msg-warning';
+                    msg.innerHTML = text;
+                    return false;
+            }
+    }
+
+    return true;
+}
+
+//#region Store bookmarks in localStorage
 function saveBookmarks(e) {
     
     // Get the value
@@ -132,7 +150,7 @@ function saveBookmarks(e) {
     var siteURL = document.getElementById('siteURL').value;
 
     // Stops storing empty fields into the array/localStorage
-    if (!formValidation(siteName, siteURL)) {
+    if (!formValidation(siteName, siteURL) || !bookmarksExist(siteName, siteURL)) {
         return false;
     }
 
@@ -163,8 +181,8 @@ function saveBookmarks(e) {
     var resultsMsg = document.getElementById('results-msg');
     // Check if results 'msg' exist
     if (resultsMsg) {
-        // Delete the msg from the DOM
-        resultsMsg.parentNode.removeChild(resultsMsg);
+        // Delete the msg from results container
+        resultsContainer.innerHTML = '';
     }
 
     // Display bookmarks
